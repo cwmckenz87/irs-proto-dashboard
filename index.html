@@ -234,7 +234,7 @@
   <main id="pegaMashup" style="display:none">
     <div class="container container-sm container-md container-lg container-xl">
       <h2 class="mt-4 mb-3">Payment Options</h2>
-      <pega-embed id='theEmbed' action='createCase' caseTypeID='Orgs-Collect-Work-ContactTaxPayer' themeID='pyWebSelfService' casePage='simplifiedAssignment' assignmentHeader='false' appAlias='collections-ai' pegaServerUrl='https://ey59.pegalabs.io/prweb/' autoReauth='true' authService='pega' clientId='39401566175904313011' style='width:100%'></pega-embed>
+      <pega-embed id='theEmbed' action='createCase' caseTypeID='Orgs-Collect-Work-ContactTaxPayer' themeID='pyWebSelfService' casePage='simplifiedAssignment' assignmentHeader='false' appAlias='collections-ai' pegaServerUrl='https://ey59.pegalabs.io/prweb/' autoReauth='true' authService='pega' clientId='39401566175904313011' style='width:100%' resumeOnReload="false"></pega-embed>
       <div  id="oicStatus" style="display:none" class="warn-panel">
         <div class="panel-title"><i class="bi bi-info-circle-fill"></i> OIC Request Pending </div>
         <p>The IRS has received your request for an offer in compromise. It is currently under review.</p>
@@ -263,6 +263,14 @@
       document.getElementById('theEmbed').style.display = 'none';
       document.getElementById('oicStatus').style.display = 'block';
     });
+    elEmbedding.addEventListener("embedeventcancel", () => {
+      document.getElementById('widgetSection').style.display = 'block';
+      document.getElementById('pegaMashup').style.display = 'none';
+      document.getElementById('paymentnav').classList.remove('active');
+      document.getElementById('homenav').classList.add('active');
+      document.getElementById("theEmbed").reload();
+    });
+
   </script>
 </body>
 </html>
