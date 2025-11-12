@@ -41,25 +41,32 @@
     }
 
     /* Info Panel */
-    .info-panel {
-      background-color: #e7f6f9;
+    .info-panel, .info-panel-small {
+      background-color: #cff4fc;
       color: black;
       border-radius: 0.25rem;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
+      
       border-left-width: 5px;
-      border-left-color: #5a7e8a;
+      border-left-color: #31d2f2;
       border-left-style: solid;
     }
 
-    .warn-panel {
-      background-color: #f7f4ea;
+    .info-panel, .warn-panel {
+      padding: 1.0rem;
+      margin-bottom: 1.0rem;
+    }
+    .info-panel-small, .warn-panel-small {
+      padding: 0.5rem;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .warn-panel, .warn-panel-small {
+      background-color: #fff3cd;
       color: black;
       border-radius: 0.25rem;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
       border-left-width: 5px;
-      border-left-color: #ffe44d;
+      border-left-color: #ffc107;
       border-left-style: solid;
     }
 
@@ -72,11 +79,19 @@
       gap: 0.5rem;
     }
 
-    .info-panel .panel-title i {
+    .info-panel-small .panel-title, .warn-panel-small .panel-title {
+      font-weight: bold;
+      margin-bottom: 0.0rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-panel .panel-title i, .warn-panel .panel-title i {
       font-size: 1.25rem;
     }
 
-    .info-panel p {
+    .info-panel p, .warn-panel p, .info-panel-small p, .warn-panel-small p  {
       margin: 0;
     }
 
@@ -89,7 +104,7 @@
 
     .widget-title {
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       margin-bottom: 0.75rem;
       text-align: left;
     }
@@ -131,8 +146,7 @@
     }
 
     .balance {
-      font-size:24px;
-      font-weight:bold;
+      font-size:32px;
       margin-top: 0.5em;
     }
 
@@ -200,18 +214,30 @@
           <div class="widget">
             <div class="widget-title">Account Status</div>
             <b>Total Amount Owed</b><br/>
-            as of Nov 12, 2025:<br/>
-            <span class="balance">$155,800.00</span></br>
+            <i>as of Nov 12, 2025:</i><br/>
+            <span class="balance">$155,800.00</span></br></br>
             <a href="#">View Balance Details</a>
           </div>
           <div class="widget">
             <div class="widget-title">Payments</div>
-            <button id="hideButton" class="btn btn-primary">GO TO PAYMENT OPTIONS</button>
+            <button id="hideButton" class="btn btn-primary btn-sm" style="margin-bottom:1rem"><b>Go to Payment Options</b></button><br/>
+            <a href="#">View Payment Activity</a>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="widget">
-            <div class="widget-title">Records</div>
+            <div class="widget-title">Notifications</div>
+            <div class="info-panel-small" id="compromiseNotification" style="display:none">
+              <div class="panel-title"><i class="bi bi-hourglass-split"></i>Compromise Offer In Review</div>
+              <p>A request for reduced payments was submitted and is currently being reviewed. Your balance will continue to reflect the original amount until the request is approved.</p>
+            </div>
+            <div class="warn-panel-small">
+              <div class="panel-title"><i class="bi bi-exclamation-diamond"></i>Additional Balance Owed</div>
+              <p>The IRS has audited and adjusted your tax return. Please review the details and pay the additional amount owed.</p>
+            </div>
+          </div>
+          <div class="widget">
+            <div class="widget-title">Records and Status</div>
             <p><a href="#">Information Return Documents</a> to assist in filing your returns.</p>
             <p><a href="#">View Tax Records</a> for:</p>
             <ul>
@@ -262,6 +288,7 @@
     elEmbedding.addEventListener("embedprocessingend", () => {
       document.getElementById('theEmbed').style.display = 'none';
       document.getElementById('oicStatus').style.display = 'block';
+      document.getElementById('compromiseNotification').style.display = 'block';
     });
     elEmbedding.addEventListener("embedeventcancel", () => {
       document.getElementById('widgetSection').style.display = 'block';
