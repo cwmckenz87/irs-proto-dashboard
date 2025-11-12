@@ -51,14 +51,14 @@
       border-left-style: solid;
     }
 
-    .info-panel, .warn-panel {
-      padding: 1.0rem;
-      margin-bottom: 1.0rem;
-    }
-    .info-panel-small, .warn-panel-small {
-      padding: 0.5rem;
-      padding-left: 1rem;
-      margin-bottom: 1rem;
+    .danger-panel, .danger-panel-small {
+      background-color: #f8d7da;
+      color: black;
+      border-radius: 0.25rem;
+      
+      border-left-width: 5px;
+      border-left-color: #721c24;
+      border-left-style: solid;
     }
 
     .warn-panel, .warn-panel-small {
@@ -70,7 +70,17 @@
       border-left-style: solid;
     }
 
-    .info-panel .panel-title, .warn-panel .panel-title {
+    .info-panel, .warn-panel, .danger-panel {
+      padding: 1.0rem;
+      margin-bottom: 1.0rem;
+    }
+    .info-panel-small, .warn-panel-small, .danger-panel-small {
+      padding: 0.5rem;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-panel .panel-title, .warn-panel .panel-title, .danger-panel .panel-title {
       font-size: 1.25rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
@@ -79,19 +89,20 @@
       gap: 0.5rem;
     }
 
-    .info-panel-small .panel-title, .warn-panel-small .panel-title {
+    .info-panel-small .panel-title, .warn-panel-small .panel-title, .danger-panel-small .panel-title {
       font-weight: bold;
-      margin-bottom: 0.0rem;
+      margin-bottom: 0.5rem;
+      margin-top: 0.25rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .info-panel .panel-title i, .warn-panel .panel-title i {
+    .info-panel .panel-title i, .warn-panel .panel-title i, .danger-panel .panel-title i {
       font-size: 1.25rem;
     }
 
-    .info-panel p, .warn-panel p, .info-panel-small p, .warn-panel-small p  {
+    .info-panel p, .warn-panel p, .info-panel-small p, .warn-panel-small p, .danger-panel p, .danger-panel-small p  {
       margin: 0;
     }
 
@@ -231,9 +242,15 @@
               <div class="panel-title"><i class="bi bi-hourglass-split"></i>Compromise Offer In Review</div>
               <p>A request for reduced payments was submitted and is currently being reviewed. Your balance will continue to reflect the original amount until the request is approved.</p>
             </div>
+            <div class="danger-panel-small" id="overdueNotification">
+              <div class="panel-title"><i class="bi bi-exclamation-octagon-fill"></i>Payment Overdue</div>
+              <p>Your payment was due on Nov 1, 2025. Please take immediate action to avoid penalties or legal action.</p>
+              <button class="btn btn-link" id="paymentopt1">View Payment Options</button>
+            </div>
             <div class="warn-panel-small">
               <div class="panel-title"><i class="bi bi-exclamation-diamond"></i>Additional Balance Owed</div>
               <p>The IRS has audited and adjusted your tax return. Please review the details and pay the additional amount owed.</p>
+              <button class="btn btn-link" id="paymentopt2">View Payment Options</button>
             </div>
           </div>
           <div class="widget">
@@ -277,6 +294,20 @@
       document.getElementById('homenav').classList.remove('active');
     });
 
+    document.getElementById('paymentopt1').addEventListener('click', () => {
+      document.getElementById('widgetSection').style.display = 'none';
+      document.getElementById('pegaMashup').style.display = 'block';
+      document.getElementById('paymentnav').classList.add('active');
+      document.getElementById('homenav').classList.remove('active');
+    });
+
+    document.getElementById('paymentopt2').addEventListener('click', () => {
+      document.getElementById('widgetSection').style.display = 'none';
+      document.getElementById('pegaMashup').style.display = 'block';
+      document.getElementById('paymentnav').classList.add('active');
+      document.getElementById('homenav').classList.remove('active');
+    });
+
     document.getElementById('homenav').addEventListener('click', () => {
       document.getElementById('widgetSection').style.display = 'block';
       document.getElementById('pegaMashup').style.display = 'none';
@@ -289,6 +320,7 @@
       document.getElementById('theEmbed').style.display = 'none';
       document.getElementById('oicStatus').style.display = 'block';
       document.getElementById('compromiseNotification').style.display = 'block';
+      document.getElementById('overdueNotification').style.display = 'none';
     });
     elEmbedding.addEventListener("embedeventcancel", () => {
       document.getElementById('widgetSection').style.display = 'block';
