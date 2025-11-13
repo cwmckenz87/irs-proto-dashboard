@@ -231,7 +231,8 @@
           </div>
           <div class="widget">
             <div class="widget-title">Payments</div>
-            <button id="hideButton" class="btn btn-primary btn-sm" style="margin-bottom:1rem"><b>Go to Payment Options</b></button><br/>
+            <button id="hideButton" class="btn btn-primary btn-sm" style="margin-bottom:1rem"><b>PAY NOW</b></button><br/>
+            <a href="#">View Payment Options</a>
             <a href="#">View Payment Activity</a>
           </div>
         </div>
@@ -245,12 +246,12 @@
             <div class="danger-panel-small" id="overdueNotification">
               <div class="panel-title"><i class="bi bi-exclamation-octagon-fill"></i>Payment Overdue</div>
               <p>Your payment was due on Nov 1, 2025. Please take immediate action to avoid penalties or legal action.</p>
-              <button class="btn btn-link" id="paymentopt1">View Payment Options</button>
+              <button class="btn btn-link" id="paymentopt1">View Options</button>
             </div>
             <div class="warn-panel-small">
               <div class="panel-title"><i class="bi bi-exclamation-diamond"></i>Additional Balance Owed</div>
               <p>The IRS has audited and adjusted your tax return. Please review the details and pay the additional amount owed.</p>
-              <button class="btn btn-link" id="paymentopt2">View Payment Options</button>
+              <button class="btn btn-link" id="paymentopt2">View Options</button>
             </div>
           </div>
           <div class="widget">
@@ -281,6 +282,7 @@
       <div  id="oicStatus" style="display:none" class="warn-panel">
         <div class="panel-title"><i class="bi bi-info-circle-fill"></i> OIC Request Pending </div>
         <p>The IRS has received your request for an offer in compromise. It is currently under review.</p>
+        <button class="btn btn-link" id="return">Return to Account Home</button>
       </div>
     </div>
   </main>
@@ -309,6 +311,13 @@
     });
 
     document.getElementById('homenav').addEventListener('click', () => {
+      document.getElementById('widgetSection').style.display = 'block';
+      document.getElementById('pegaMashup').style.display = 'none';
+      document.getElementById('paymentnav').classList.remove('active');
+      document.getElementById('homenav').classList.add('active');
+    });
+
+    document.getElementById('return').addEventListener('click', () => {
       document.getElementById('widgetSection').style.display = 'block';
       document.getElementById('pegaMashup').style.display = 'none';
       document.getElementById('paymentnav').classList.remove('active');
