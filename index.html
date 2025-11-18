@@ -243,6 +243,10 @@
               <div class="panel-title"><i class="bi bi-hourglass-split"></i>Compromise Offer In Review</div>
               <p>A request for reduced payments was submitted and is currently being reviewed. Your balance will continue to reflect the original amount until the request is approved.</p>
             </div>
+            <div class="info-panel-small" id="appealNotification" style="display:none">
+              <div class="panel-title"><i class="bi bi-hourglass-split"></i>Compromise Offer In Review</div>
+              <p>Your appeal is currently being reviewed. You will be notified once a determination is made.</p>
+            </div>
             <div class="danger-panel-small" id="overdueNotification">
               <div class="panel-title"><i class="bi bi-exclamation-octagon-fill"></i>Payment Overdue</div>
               <p>Your payment was due on Nov 1, 2025. Please take immediate action to avoid penalties or legal action.</p>
@@ -259,7 +263,7 @@
             <p><a href="#">Information Return Documents</a> to assist in filing your returns.</p>
             <p><a href="#">View Tax Records</a> for:</p>
             <ul>
-              <li>Key Information from your msot recent tax return</li>
+              <li>Key Information from your most recent tax return</li>
               <li>Downloadable transcripts and Tax Compliance Report</li>
             </ul>
             <p>View Status for:</p>
@@ -282,6 +286,11 @@
       <div  id="oicStatus" style="display:none" class="warn-panel">
         <div class="panel-title"><i class="bi bi-info-circle-fill"></i> OIC Request Pending </div>
         <p>The IRS has received your request for an offer in compromise. It is currently under review.</p>
+        <button class="btn btn-link" id="return">Return to Account Home</button>
+      </div>
+      <div  id="appealStatus" style="display:none" class="warn-panel">
+        <div class="panel-title"><i class="bi bi-info-circle-fill"></i> Appeal Request Pending </div>
+        <p>The IRS has received your appeal. It is currently under review.</p>
         <button class="btn btn-link" id="return">Return to Account Home</button>
       </div>
     </div>
@@ -327,9 +336,15 @@
     let elEmbedding = document.getElementById("theEmbed");
     elEmbedding.addEventListener("embedprocessingend", () => {
       document.getElementById('theEmbed').style.display = 'none';
-      document.getElementById('oicStatus').style.display = 'block';
-      document.getElementById('compromiseNotification').style.display = 'block';
       document.getElementById('overdueNotification').style.display = 'none';
+      console.log(document.getElementById("theEmbed").getEmbedData(".HelpActions"));
+      if (document.getElementById("theEmbed").getEmbedData(".HelpActions") == "I received a hearing notice and I would like to appeal") {
+        document.getElementById('appealStatus').style.display = 'block';
+        document.getElementById('appealNotification').style.display = 'block';
+      } else {
+        document.getElementById('oicStatus').style.display = 'block';
+        document.getElementById('compromiseNotification').style.display = 'block';
+      }
     });
     elEmbedding.addEventListener("embedeventcancel", () => {
       document.getElementById('widgetSection').style.display = 'block';
